@@ -1,4 +1,4 @@
-#Nightstand App
+# Nightstand App
 
 A simple web app to turn my old little-used tablet into a makeshift clock & weather displayer on my nightstand, to show time and weather.  Many weather apps don't show the time, and many clock apps don't show the weather outright without clicking some buttons, so I created my own!  Check it out [here](https://sharonchoong.github.io/nightstand)
 
