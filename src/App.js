@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-//import logo from './logo.svg';
 import './App.css';
+import moment from 'moment';
 import settingsImg from './settings_applications.svg';
 import Modal from 'react-bootstrap/Modal';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
@@ -33,18 +33,18 @@ class Weather extends React.Component {
 		{
 			const weather_symbol = this.props.currentWeather.weather.map((weatherdata, i) =>{
 				return(
-				<div className="col-auto small" key={weatherdata.main}>
-					<div><img alt={weatherdata.main} src={"http://openweathermap.org/img/wn/" + weatherdata.icon + "@2x.png"}/></div>
-					<div className="text-capitalize small">{weatherdata.description}</div>
+				<div className="col-auto" key={weatherdata.main}>
+					<div><img width="160" alt={weatherdata.main} src={"http://openweathermap.org/img/wn/" + weatherdata.icon + "@2x.png"}/></div>
+					<div className="text-capitalize font-weight-bold">{weatherdata.description}</div>
 				</div>)
 			})
 			return (
 				<div>
-					<div className="date row justify-content-center">
+					<div className="currentWeather row justify-content-center" style={{lineHeight: "1.2"}}>
 						<div className="col-auto">
 							<div className="row">{weather_symbol}</div>
 							<div className="row">
-								<div className='col' style={{fontWeight: "normal"}}>
+								<div className='col small'>
 								{this.props.currentWeather.name + ", " + this.props.currentWeather.sys.country}
 								</div>
 							</div>
@@ -86,17 +86,17 @@ class WeatherForecast extends React.Component {
 			let daySet = [];
 			for (let i = 0; i < this.props.forecastWeather.list.length; i++)
 			{
-				const new_day = new Date(this.props.forecastWeather.list[i].dt * 1000).toLocaleDateString("en-US", {weekday: 'short', day: 'numeric'});
+				const new_day = moment.unix(this.props.forecastWeather.list[i].dt).format('dddd Do');
                 if (daySet.indexOf(new_day) === -1 && new Date(this.props.forecastWeather.list[i].dt * 1000).getHours() >= 8 && new Date(this.props.forecastWeather.list[i].dt * 1000).getHours() <= 18)
 	                daySet.push(new_day);
 			}
 			const weatherCard = daySet.map((day, i) => {
 				const hourCard = this.props.forecastWeather.list.filter((weatherdata, i) => 
-					new Date(weatherdata.dt * 1000).getHours() >= 8 && new Date(weatherdata.dt * 1000).getHours() <= 18 && new Date(weatherdata.dt * 1000).toLocaleDateString("en-US", {weekday: 'short', day: 'numeric'}) === day
+					new Date(weatherdata.dt * 1000).getHours() >= 8 && new Date(weatherdata.dt * 1000).getHours() <= 18 && moment.unix(weatherdata.dt).format('dddd Do') === day
 				).map((weatherdata, i) => {
 					return (
 					<div key={weatherdata.dt_txt}>
-						<div>{new Date(weatherdata.dt * 1000).toLocaleTimeString("en-US", {hour: 'numeric', hour12: true})}</div>
+						<div>{moment.unix(weatherdata.dt).format('h a')}</div>
 						<div><img alt={weatherdata.weather[0].main} src={"http://openweathermap.org/img/wn/" + weatherdata.weather[0].icon + "@2x.png"}/></div>
 						<div>{weatherdata.main.temp.toFixed() + temp_unit}</div>
 						<div className="small">
@@ -113,7 +113,7 @@ class WeatherForecast extends React.Component {
                 );
             }); 
 			return (
-				<div className="d-flex" style={{overflowX: "scroll"}}>
+				<div className="d-flex" style={{overflowX: "scroll", overflowScrolling: "touch", WebkitOverflowScrolling: "touch", whiteSpace: "nowrap"}}>
 					{weatherCard}
 				</div>);
 		}
@@ -125,7 +125,7 @@ class WeatherForecast extends React.Component {
 class Clock extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {date: new Date()};
+		this.state = {date: moment()};
 	}
 	componentDidMount() {
 		this.timerID = setInterval(
@@ -137,18 +137,17 @@ class Clock extends React.Component {
 	}
 	tickSecond() {
 		this.setState({
-		  date: new Date()
+		  date: moment()
 		});
 	}
 	render() {
-		const time_string = this.state.date.toLocaleTimeString();
 		return (
 		<div>
 			<div>
-				<span className="time">{time_string.substring(0, time_string.length - 6)}</span>
-				<span className="date">{time_string.substring(time_string.length - 6)}</span>
+				<span className="time">{this.state.date.format('h:mm')}</span>
+				<span className="date">{this.state.date.format(':ss a')}</span>
 			</div>
-			<div className="date col-auto">{this.state.date.toLocaleDateString("en-US", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})}</div>
+			<div className="date col-auto">{this.state.date.format('dddd, MMMM Do YYYY')}</div>
 		</div>
     );
   }
@@ -387,7 +386,7 @@ class App extends React.Component {
 	getWeather(coords) {
 		const apikey = this.state.apikey !== "" ? this.state.apikey: this.apikey;
 		const unitsystem = this.unitSystem === null ? this.state.unitsystem: this.unitSystem;
-		if (apikey !== "")
+		if (apikey !== "" && apikey !== null && apikey !== undefined)
 		{
 			const that = this;
 			axios.all([

@@ -40,12 +40,15 @@
 }
 
 .date {
-	font-size: calc(5vmin);
+	font-size: calc(8vmin);
 	font-weight: bold;
 }
 .temp {
-	font-size: calc(8vmin);
+	font-size: calc(10vmin);
 	font-weight: bold;
+}
+.currentWeather{
+	font-size: calc(5vmin);
 }
 .settings {
 	width: 5vmin;
