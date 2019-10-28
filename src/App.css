@@ -1,6 +1,7 @@
 .App {
   text-align: center;
   background-color: #282c34;
+  padding: 10px;
 }
 
 .App-logo {
@@ -44,11 +45,19 @@
 	font-weight: bold;
 }
 .temp {
+	font-size: calc(15vmin);
+	font-weight: bold;
+}
+.wind {
 	font-size: calc(10vmin);
 	font-weight: bold;
 }
 .currentWeather{
 	font-size: calc(5vmin);
+}
+.weatherIcon {
+	border-radius: 10px;
+	filter: drop-shadow(-3px 10px 5px #bad5ff)
 }
 .settings {
 	width: 5vmin;

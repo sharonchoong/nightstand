@@ -34,13 +34,13 @@ class Weather extends React.Component {
 			const weather_symbol = this.props.currentWeather.weather.map((weatherdata, i) =>{
 				return(
 				<div className="col-auto" key={weatherdata.main}>
-					<div><img width="160" alt={weatherdata.main} src={"http://openweathermap.org/img/wn/" + weatherdata.icon + "@2x.png"}/></div>
-					<div className="text-capitalize font-weight-bold">{weatherdata.description}</div>
+					<div><img className="weatherIcon" width="160" alt={weatherdata.main} src={"http://openweathermap.org/img/wn/" + weatherdata.icon + "@2x.png"}/></div>
+					<div className="text-capitalize font-weight-bold" style={{lineHeight: "1"}}>{weatherdata.description}</div>
 				</div>)
 			})
 			return (
 				<div>
-					<div className="currentWeather row justify-content-center" style={{lineHeight: "1.2"}}>
+					<div className="currentWeather row justify-content-center">
 						<div className="col-auto">
 							<div className="row">{weather_symbol}</div>
 							<div className="row">
@@ -50,10 +50,10 @@ class Weather extends React.Component {
 							</div>
 						</div>
 						<div className="col-auto">
-							<div className="temp">{this.props.currentWeather.main.temp.toFixed() + temp_unit}</div>
+							<div className="temp" style={{lineHeight: "1"}}>{this.props.currentWeather.main.temp.toFixed() + temp_unit}</div>
+							<div className="wind" style={{lineHeight: "1"}}>{this.props.currentWeather.wind.speed + wind_unit}</div>
 							<div className="small">
 								<div className="small" style={{fontWeight: "normal"}}>Humidity: {this.props.currentWeather.main.humidity}%</div>
-								<div className="small" style={{fontWeight: "normal"}}>Wind: {this.props.currentWeather.wind.speed + wind_unit}</div>
 								<div className="small" style={{fontWeight: "normal"}}>Cloudiness: {this.props.currentWeather.clouds.all}%</div>
 							</div>
 						</div>
@@ -95,25 +95,25 @@ class WeatherForecast extends React.Component {
 					new Date(weatherdata.dt * 1000).getHours() >= 8 && new Date(weatherdata.dt * 1000).getHours() <= 18 && moment.unix(weatherdata.dt).format('dddd Do') === day
 				).map((weatherdata, i) => {
 					return (
-					<div key={weatherdata.dt_txt}>
+					<div key={weatherdata.dt_txt} className="col flex-shrink-0">
 						<div>{moment.unix(weatherdata.dt).format('h a')}</div>
-						<div><img alt={weatherdata.weather[0].main} src={"http://openweathermap.org/img/wn/" + weatherdata.weather[0].icon + "@2x.png"}/></div>
+						<div><img className="weatherIcon" alt={weatherdata.weather[0].main} src={"http://openweathermap.org/img/wn/" + weatherdata.weather[0].icon + ".png"}/></div>
 						<div>{weatherdata.main.temp.toFixed() + temp_unit}</div>
 						<div className="small">
-							<div className="" style={{fontWeight: "normal"}}>{weatherdata.wind.speed + wind_unit} wind</div>
+							<div style={{fontWeight: "normal"}}>{weatherdata.wind.speed + wind_unit + " wind"}</div>
 						</div>
 					</div>
 					);
 				});
 				return (
-				<div key={day} className="border">
+				<div key={day} className="border flex-shrink-0">
 					<div>{day}</div>
-					<div className="d-flex">{hourCard}</div>
+					<div className="d-flex flex-row flex-nowrap">{hourCard}</div>
 				</div>
                 );
             }); 
 			return (
-				<div className="d-flex" style={{overflowX: "scroll", overflowScrolling: "touch", WebkitOverflowScrolling: "touch", whiteSpace: "nowrap"}}>
+				<div className="d-flex flex-row flex-nowrap" style={{overflowX: "scroll", overflowScrolling: "touch", WebkitOverflowScrolling: "touch", whiteSpace: "nowrap"}}>
 					{weatherCard}
 				</div>);
 		}
