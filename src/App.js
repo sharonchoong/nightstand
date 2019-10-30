@@ -33,7 +33,7 @@ class Weather extends React.Component {
 		{
 			const weather_symbol = this.props.currentWeather.weather.map((weatherdata, i) =>{
 				return(
-				<div className="col-auto" key={weatherdata.main}>
+				<div className="col-auto" key={weatherdata.main} style={{maxWidth: "300px"}}>
 					<div><img className="weatherIcon" width="160" alt={weatherdata.main} src={"http://openweathermap.org/img/wn/" + weatherdata.icon + "@2x.png"}/></div>
 					<div className="text-capitalize font-weight-bold" style={{lineHeight: "1"}}>{weatherdata.description}</div>
 				</div>)
@@ -51,10 +51,10 @@ class Weather extends React.Component {
 						</div>
 						<div className="col-auto">
 							<div className="temp" style={{lineHeight: "1"}}>{this.props.currentWeather.main.temp.toFixed() + temp_unit}</div>
+							<div className="wind" style={{lineHeight: "1"}}>{this.props.todayHighLow.low.toFixed() + temp_unit + " | " + this.props.todayHighLow.high.toFixed() + temp_unit}</div>
 							<div className="wind" style={{lineHeight: "1"}}>{this.props.currentWeather.wind.speed + wind_unit}</div>
 							<div className="small">
-								<div className="small" style={{fontWeight: "normal"}}>Humidity: {this.props.currentWeather.main.humidity}%</div>
-								<div className="small" style={{fontWeight: "normal"}}>Cloudiness: {this.props.currentWeather.clouds.all}%</div>
+								<div className="small" style={{fontWeight: "normal"}}>{this.props.currentWeather.main.humidity + "% humid, " + this.props.currentWeather.clouds.all + "% clouds"}</div>
 							</div>
 						</div>
 					</div>
@@ -87,17 +87,17 @@ class WeatherForecast extends React.Component {
 			for (let i = 0; i < this.props.forecastWeather.list.length; i++)
 			{
 				const new_day = moment.unix(this.props.forecastWeather.list[i].dt).format('dddd Do');
-                if (daySet.indexOf(new_day) === -1 && new Date(this.props.forecastWeather.list[i].dt * 1000).getHours() >= 8 && new Date(this.props.forecastWeather.list[i].dt * 1000).getHours() <= 18)
+                if (daySet.indexOf(new_day) === -1 && new Date(this.props.forecastWeather.list[i].dt * 1000).getHours() >= 8 && new Date(this.props.forecastWeather.list[i].dt * 1000).getHours() <= 20)
 	                daySet.push(new_day);
 			}
 			const weatherCard = daySet.map((day, i) => {
 				const hourCard = this.props.forecastWeather.list.filter((weatherdata, i) => 
-					new Date(weatherdata.dt * 1000).getHours() >= 8 && new Date(weatherdata.dt * 1000).getHours() <= 18 && moment.unix(weatherdata.dt).format('dddd Do') === day
+					new Date(weatherdata.dt * 1000).getHours() >= 8 && new Date(weatherdata.dt * 1000).getHours() <= 20 && moment.unix(weatherdata.dt).format('dddd Do') === day
 				).map((weatherdata, i) => {
 					return (
 					<div key={weatherdata.dt_txt} className="col flex-shrink-0">
+						<div><img className="weatherIcon" alt={weatherdata.weather[0].main} src={"http://openweathermap.org/img/wn/" + weatherdata.weather[0].icon + "@2x.png"}/></div>
 						<div>{moment.unix(weatherdata.dt).format('h a')}</div>
-						<div><img className="weatherIcon" alt={weatherdata.weather[0].main} src={"http://openweathermap.org/img/wn/" + weatherdata.weather[0].icon + ".png"}/></div>
 						<div>{weatherdata.main.temp.toFixed() + temp_unit}</div>
 						<div className="small">
 							<div style={{fontWeight: "normal"}}>{weatherdata.wind.speed + wind_unit + " wind"}</div>
@@ -296,6 +296,7 @@ class App extends React.Component {
 			locations: [],
 			unitsystem: "imperial",
 			currentWeather: null,
+			forecastWeather: null,
 			apikey: ""
 		};
 	}
@@ -408,19 +409,31 @@ class App extends React.Component {
 			})])
 			.then(axios.spread((responsecurrent, responseforecast) => {
 				let locations = that.state.locations.slice();
-				if (locations.filter((location) => 
-				{ return location.cityid === responsecurrent.data.id; }).length === 0)
+				if (locations.filter((location) => location.cityid === responsecurrent.data.id).length === 0)
 				{
 					const newcoords = coords;
 					newcoords.name = responsecurrent.data.name + ", " + responsecurrent.data.sys.country;
 					newcoords.cityid = responsecurrent.data.id;
 					locations = locations.concat([newcoords]);
 				}
+				let low = responsecurrent.data.main.temp;
+				let high = responsecurrent.data.main.temp;
+				for (let i = 0; i < responseforecast.data.list.length; i++)
+				{
+					if (moment.unix(responseforecast.data.list[i].dt).format('dddd Do') === moment().format('dddd Do'))
+					{
+						if (responseforecast.data.list[i].main.temp > high)
+							high = responseforecast.data.list[i].main.temp;
+						else if (responseforecast.data.list[i].main.temp < low)
+							low = responseforecast.data.list[i].main.temp;
+					}
+				}
 				that.setState({ 
 					locations: locations,
 					apikey: apikey,
 					unitsystem: unitsystem,
 					currentWeather: responsecurrent.data, 
+					todayHighLow: { high: high, low: low },
 					forecastWeather: responseforecast.data });
 			}))
 			.catch(function (error) {
@@ -451,6 +464,7 @@ class App extends React.Component {
 				<header>
 					<Clock state={this.state.unitsystem} />
 					<Weather className="col-6 text-right" 
+					todayHighLow={this.state.todayHighLow}
 					currentWeather={this.state.currentWeather}
 					getLocation={() => this.getLocation() } 
 					unit={this.state.unitsystem}/>
