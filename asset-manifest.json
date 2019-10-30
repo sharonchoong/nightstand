@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/nightstand/static/css/main.b811ffec.chunk.css",
-    "main.js": "/nightstand/static/js/main.70992f5c.chunk.js",
-    "main.js.map": "/nightstand/static/js/main.70992f5c.chunk.js.map",
+    "main.js": "/nightstand/static/js/main.f065a867.chunk.js",
+    "main.js.map": "/nightstand/static/js/main.f065a867.chunk.js.map",
     "runtime-main.js": "/nightstand/static/js/runtime-main.58bdee8c.js",
     "runtime-main.js.map": "/nightstand/static/js/runtime-main.58bdee8c.js.map",
     "static/css/2.510409cd.chunk.css": "/nightstand/static/css/2.510409cd.chunk.css",
-    "static/js/2.79574a01.chunk.js": "/nightstand/static/js/2.79574a01.chunk.js",
-    "static/js/2.79574a01.chunk.js.map": "/nightstand/static/js/2.79574a01.chunk.js.map",
+    "static/js/2.d42a61c8.chunk.js": "/nightstand/static/js/2.d42a61c8.chunk.js",
+    "static/js/2.d42a61c8.chunk.js.map": "/nightstand/static/js/2.d42a61c8.chunk.js.map",
     "index.html": "/nightstand/index.html",
-    "precache-manifest.676efa6f4cb283180b981f584e87f916.js": "/nightstand/precache-manifest.676efa6f4cb283180b981f584e87f916.js",
+    "precache-manifest.7990f57d4bf52f5398776f6cdc949cbb.js": "/nightstand/precache-manifest.7990f57d4bf52f5398776f6cdc949cbb.js",
     "service-worker.js": "/nightstand/service-worker.js",
     "static/css/2.510409cd.chunk.css.map": "/nightstand/static/css/2.510409cd.chunk.css.map",
     "static/css/main.b811ffec.chunk.css.map": "/nightstand/static/css/main.b811ffec.chunk.css.map",
@@ -18,8 +18,8 @@
   "entrypoints": [
     "static/js/runtime-main.58bdee8c.js",
     "static/css/2.510409cd.chunk.css",
-    "static/js/2.79574a01.chunk.js",
+    "static/js/2.d42a61c8.chunk.js",
     "static/css/main.b811ffec.chunk.css",
-    "static/js/main.70992f5c.chunk.js"
+    "static/js/main.f065a867.chunk.js"
   ]
 }
