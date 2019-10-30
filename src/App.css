@@ -57,7 +57,7 @@
 }
 .weatherIcon {
 	border-radius: 10px;
-	filter: drop-shadow(-3px 10px 5px #bad5ff)
+	filter: drop-shadow(-3px 17px 10px #bad5ff)
 }
 .settings {
 	width: 5vmin;
