@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/nightstand/static/css/main.b811ffec.chunk.css",
+    "main.css": "/nightstand/static/css/main.6a02f44e.chunk.css",
     "main.js": "/nightstand/static/js/main.f065a867.chunk.js",
     "main.js.map": "/nightstand/static/js/main.f065a867.chunk.js.map",
     "runtime-main.js": "/nightstand/static/js/runtime-main.58bdee8c.js",
@@ -9,17 +9,17 @@
     "static/js/2.d42a61c8.chunk.js": "/nightstand/static/js/2.d42a61c8.chunk.js",
     "static/js/2.d42a61c8.chunk.js.map": "/nightstand/static/js/2.d42a61c8.chunk.js.map",
     "index.html": "/nightstand/index.html",
-    "precache-manifest.7990f57d4bf52f5398776f6cdc949cbb.js": "/nightstand/precache-manifest.7990f57d4bf52f5398776f6cdc949cbb.js",
+    "precache-manifest.c0a04d8d51802cdc5b9649cd9ec72cec.js": "/nightstand/precache-manifest.c0a04d8d51802cdc5b9649cd9ec72cec.js",
     "service-worker.js": "/nightstand/service-worker.js",
     "static/css/2.510409cd.chunk.css.map": "/nightstand/static/css/2.510409cd.chunk.css.map",
-    "static/css/main.b811ffec.chunk.css.map": "/nightstand/static/css/main.b811ffec.chunk.css.map",
+    "static/css/main.6a02f44e.chunk.css.map": "/nightstand/static/css/main.6a02f44e.chunk.css.map",
     "static/media/settings_applications.svg": "/nightstand/static/media/settings_applications.1e7b161a.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.58bdee8c.js",
     "static/css/2.510409cd.chunk.css",
     "static/js/2.d42a61c8.chunk.js",
-    "static/css/main.b811ffec.chunk.css",
+    "static/css/main.6a02f44e.chunk.css",
     "static/js/main.f065a867.chunk.js"
   ]
 }
