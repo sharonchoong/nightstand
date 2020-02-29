@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "27719c14a7084ba102fbc71e8162f58a",
+    "revision": "f4d3aacdc4998d866116b97078be1e54",
     "url": "/nightstand/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/nightstand/static/css/2.903a27b1.chunk.css"
   },
   {
-    "revision": "173f0affe28d4bb05eff",
-    "url": "/nightstand/static/css/main.ae216fe9.chunk.css"
+    "revision": "37861b91a20462ce9cf7",
+    "url": "/nightstand/static/css/main.170ba78b.chunk.css"
   },
   {
     "revision": "685ed02bada65f32c69d",
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/nightstand/static/js/2.c408eb74.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "173f0affe28d4bb05eff",
-    "url": "/nightstand/static/js/main.f5095fa5.chunk.js"
+    "revision": "37861b91a20462ce9cf7",
+    "url": "/nightstand/static/js/main.4f79f02b.chunk.js"
   },
   {
     "revision": "260c8bdfb24eba70a816",
