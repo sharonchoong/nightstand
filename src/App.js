@@ -51,7 +51,7 @@ class Weather extends React.Component {
 						</div>
 						<div className="col-auto">
 							<div className="temp" style={{lineHeight: "1"}}>{this.props.currentWeather.main.temp.toFixed() + temp_unit}</div>
-							<div className="wind" style={{lineHeight: "1"}}>{this.props.todayHighLow.low.toFixed() + temp_unit + " | " + this.props.todayHighLow.high.toFixed() + temp_unit}</div>
+							<div className="temp_small" style={{lineHeight: "1"}}>{this.props.todayHighLow.low.toFixed() + temp_unit + " | " + this.props.todayHighLow.high.toFixed() + temp_unit}</div>
 							<div className="wind" style={{lineHeight: "1"}}>{this.props.currentWeather.wind.speed + wind_unit}</div>
 							<div className="small">
 								<div className="small" style={{fontWeight: "normal"}}>{this.props.currentWeather.main.humidity + "% humid, " + this.props.currentWeather.clouds.all + "% clouds"}</div>
@@ -96,7 +96,7 @@ class WeatherForecast extends React.Component {
 				).map((weatherdata, i) => {
 					return (
 					<div key={weatherdata.dt_txt} className="col flex-shrink-0">
-						<div><img className="weatherIcon" alt={weatherdata.weather[0].main} src={"http://openweathermap.org/img/wn/" + weatherdata.weather[0].icon + "@2x.png"}/></div>
+						<div><img className="weatherIcon" alt={weatherdata.weather[0].main} height='80px' src={"http://openweathermap.org/img/wn/" + weatherdata.weather[0].icon + "@2x.png"}/></div>
 						<div>{moment.unix(weatherdata.dt).format('h a')}</div>
 						<div>{weatherdata.main.temp.toFixed() + temp_unit}</div>
 						<div className="small">

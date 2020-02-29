@@ -48,8 +48,12 @@
 	font-size: calc(15vmin);
 	font-weight: bold;
 }
-.wind {
+.temp_small {
 	font-size: calc(10vmin);
+	font-weight: bold;
+}
+.wind {
+	font-size: calc(8vmin);
 	font-weight: bold;
 }
 .currentWeather{

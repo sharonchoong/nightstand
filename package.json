@@ -1,6 +1,6 @@
 {
   "name": "nightstand",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "private": true,
   "homepage": "https://sharonchoong.github.io/nightstand",
   "dependencies": {
@@ -11,7 +11,7 @@
     "react": "^16.10.2",
     "react-bootstrap": "^1.0.0-beta.14",
     "react-dom": "^16.10.2",
-    "react-scripts": "3.2.0"
+    "react-scripts": "^3.4.0"
   },
   "scripts": {
     "predeploy": "npm run build",
