@@ -1,25 +1,26 @@
 {
   "files": {
-    "main.css": "/nightstand/static/css/main.6a02f44e.chunk.css",
-    "main.js": "/nightstand/static/js/main.fe19387b.chunk.js",
-    "main.js.map": "/nightstand/static/js/main.fe19387b.chunk.js.map",
-    "runtime-main.js": "/nightstand/static/js/runtime-main.58bdee8c.js",
-    "runtime-main.js.map": "/nightstand/static/js/runtime-main.58bdee8c.js.map",
-    "static/css/2.510409cd.chunk.css": "/nightstand/static/css/2.510409cd.chunk.css",
-    "static/js/2.d42a61c8.chunk.js": "/nightstand/static/js/2.d42a61c8.chunk.js",
-    "static/js/2.d42a61c8.chunk.js.map": "/nightstand/static/js/2.d42a61c8.chunk.js.map",
+    "main.css": "/nightstand/static/css/main.ae216fe9.chunk.css",
+    "main.js": "/nightstand/static/js/main.f5095fa5.chunk.js",
+    "main.js.map": "/nightstand/static/js/main.f5095fa5.chunk.js.map",
+    "runtime-main.js": "/nightstand/static/js/runtime-main.2709c009.js",
+    "runtime-main.js.map": "/nightstand/static/js/runtime-main.2709c009.js.map",
+    "static/css/2.903a27b1.chunk.css": "/nightstand/static/css/2.903a27b1.chunk.css",
+    "static/js/2.c408eb74.chunk.js": "/nightstand/static/js/2.c408eb74.chunk.js",
+    "static/js/2.c408eb74.chunk.js.map": "/nightstand/static/js/2.c408eb74.chunk.js.map",
     "index.html": "/nightstand/index.html",
-    "precache-manifest.27789ae5a5ff5790c843feefc8f8f7d9.js": "/nightstand/precache-manifest.27789ae5a5ff5790c843feefc8f8f7d9.js",
+    "precache-manifest.ed754ac64f9a022bb516f88a6c7aa685.js": "/nightstand/precache-manifest.ed754ac64f9a022bb516f88a6c7aa685.js",
     "service-worker.js": "/nightstand/service-worker.js",
-    "static/css/2.510409cd.chunk.css.map": "/nightstand/static/css/2.510409cd.chunk.css.map",
-    "static/css/main.6a02f44e.chunk.css.map": "/nightstand/static/css/main.6a02f44e.chunk.css.map",
+    "static/css/2.903a27b1.chunk.css.map": "/nightstand/static/css/2.903a27b1.chunk.css.map",
+    "static/css/main.ae216fe9.chunk.css.map": "/nightstand/static/css/main.ae216fe9.chunk.css.map",
+    "static/js/2.c408eb74.chunk.js.LICENSE.txt": "/nightstand/static/js/2.c408eb74.chunk.js.LICENSE.txt",
     "static/media/settings_applications.svg": "/nightstand/static/media/settings_applications.1e7b161a.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.58bdee8c.js",
-    "static/css/2.510409cd.chunk.css",
-    "static/js/2.d42a61c8.chunk.js",
-    "static/css/main.6a02f44e.chunk.css",
-    "static/js/main.fe19387b.chunk.js"
+    "static/js/runtime-main.2709c009.js",
+    "static/css/2.903a27b1.chunk.css",
+    "static/js/2.c408eb74.chunk.js",
+    "static/css/main.ae216fe9.chunk.css",
+    "static/js/main.f5095fa5.chunk.js"
   ]
 }
