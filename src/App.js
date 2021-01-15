@@ -34,7 +34,7 @@ class Weather extends React.Component {
 			const weather_symbol = this.props.currentWeather.weather.map((weatherdata, i) =>{
 				return(
 				<div className="col-auto" key={weatherdata.main} style={{maxWidth: "300px"}}>
-					<div><img className="weatherIcon" width="160" alt={weatherdata.main} src={"http://openweathermap.org/img/wn/" + weatherdata.icon + "@2x.png"}/></div>
+					<div><img className="weatherIcon" width="160" alt={weatherdata.main} src={"https://openweathermap.org/img/wn/" + weatherdata.icon + "@2x.png"}/></div>
 					<div className="text-capitalize font-weight-bold" style={{lineHeight: "1"}}>{weatherdata.description}</div>
 				</div>)
 			})
@@ -96,7 +96,7 @@ class WeatherForecast extends React.Component {
 				).map((weatherdata, i) => {
 					return (
 					<div key={weatherdata.dt_txt} className="col flex-shrink-0">
-						<div><img className="weatherIcon" alt={weatherdata.weather[0].main} height='80px' src={"http://openweathermap.org/img/wn/" + weatherdata.weather[0].icon + "@2x.png"}/></div>
+						<div><img className="weatherIcon" alt={weatherdata.weather[0].main} height='80px' src={"https://openweathermap.org/img/wn/" + weatherdata.weather[0].icon + "@2x.png"}/></div>
 						<div>{moment.unix(weatherdata.dt).format('h a')}</div>
 						<div>{weatherdata.main.temp.toFixed() + temp_unit}</div>
 						<div className="small">
@@ -147,7 +147,7 @@ class Clock extends React.Component {
 				<span className="time">{this.state.date.format('h:mm')}</span>
 				<span className="date">{this.state.date.format(':ss a')}</span>
 			</div>
-			<div className="date col-auto">{this.state.date.format('dddd, MMMM Do YYYY')}</div>
+			<div className="date col-auto">{this.state.date.format('dddd, MMM Do YYYY')}</div>
 		</div>
     );
   }
@@ -155,7 +155,7 @@ class Clock extends React.Component {
 
 class SuggestDropdown extends React.Component {
 	constructor(props) {
-		super(props)
+		super(props);
 		this.delayTimer = null;
 		this.state = {locationsuggestions: [], location_query: ""};
 	}
@@ -191,7 +191,7 @@ class SuggestDropdown extends React.Component {
 				})
 				.catch(function (error) {
 					alert("When retrieving locations: " + error + ". " + 
-					(error.response ? error.response.data.message: ""));
+					(error.response ? error.response.message: ""));
 				});
 				
 			}, 500);
@@ -204,9 +204,9 @@ class SuggestDropdown extends React.Component {
 	render() {
 		const locationdropdowns = this.state.locationsuggestions.map((suggestion, i) => {
 			return (
-			<Dropdown.Item as="button" key={'dropdown_' + suggestion.latitude + ',' + suggestion.longitude}
+			<Dropdown.Item as="div" key={'dropdown_' + suggestion.latitude + ',' + suggestion.longitude}
 			onClick={() => {this.props.onLocationChange("add", suggestion ); this.setState({location_query: "", locationsuggestions: []}) }}>
-				{suggestion.name}&nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" rel="noopener noreferrer"
+				{suggestion.name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" rel="noopener noreferrer" style={{fontSize: "small"}}
 				key={'googlemap_' + suggestion.latitude + ',' + suggestion.longitude} onClick={(e) => e.stopPropagation()}
 				href={"https://www.google.com/maps/search/?api=1&query=" + suggestion.latitude+"," + suggestion.longitude}>
 				Check on map</a>
@@ -218,6 +218,7 @@ class SuggestDropdown extends React.Component {
 					onChange={(e) => this.suggestLocations(e.target.value)}
 					placeholder="Add location <City, country code> (e.g. London, UK)" aria-label="Location"/>
 				<Dropdown show={this.state.locationsuggestions.length > 0}>
+					<Dropdown.Toggle as="div" style={{visibility: "hidden", height: "1px"}}></Dropdown.Toggle>
 					<Dropdown.Menu>{locationdropdowns}</Dropdown.Menu>
 				</Dropdown>
 			</div>
@@ -274,7 +275,7 @@ function Settings(props) {
 						<div className="mt-3">
 							<h5>Unit System</h5>
 							<ButtonToolbar>
-								<ToggleButtonGroup type="radio" name="options" defaultValue={"imperial"}
+								<ToggleButtonGroup type="radio" name="options" defaultValue={props.unit}
 								onChange={(e) => props.onUnitChange(e)}>
 									<ToggleButton className="btn-secondary" value={"metric"}>Metric</ToggleButton>
 									<ToggleButton className="btn-secondary" value={"imperial"}>Imperial</ToggleButton>
@@ -347,26 +348,17 @@ class App extends React.Component {
 				},
 				(error) => {
 					const that = this;
-					axios.get('https://ipgeolocation.com/?json=1')
+					axios.get('https://ipapi.co/json')
 						.then(function (response) {
-							const data = response.data.coords;
-							coords.latitude = Number(data.split(",")[0]);
-							coords.longitude = Number(data.split(",")[1]);
+							const data = response.data;
+							coords.latitude = Number(data.latitude);
+							coords.longitude = Number(data.longitude);
 							that.getWeather(coords);
 						})
 						.catch(function (error) {
-							axios.get('https://ipapi.co/json')
-							.then(function (response) {
-								const data = response.data;
-								coords.latitude = Number(data.latitude);
-								coords.longitude = Number(data.longitude);
-								that.getWeather(coords);
-							})
-							.catch(function (error) {
-								alert("When retrieving IP location: " + error + ". " + 
-								(error.response ? error.response.data.message: ""));
-								that.getWeather(coords);
-							});
+							alert("When retrieving IP location: " + error + ". " + 
+							(error.response ? error.response.data.message: ""));
+							that.getWeather(coords);
 						});
 				});
 			};
@@ -457,7 +449,7 @@ class App extends React.Component {
 			<Settings 
 			locations={this.state.locations} apikey={this.state.apikey}
 			onKeySave={(keyInput) => this.handleKeySave(keyInput)} 
-			onUnitChange={(newUnit) => this.handleUnitChange(newUnit)}
+			onUnitChange={(newUnit) => this.handleUnitChange(newUnit)} unit={this.state.unitsystem}
 			onLocationChange={(action, location) => this.handleLocationChange(action, location)}
 			/>
 			<div className="Current container-fluid">
