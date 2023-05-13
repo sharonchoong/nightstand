@@ -34,7 +34,7 @@ class Weather extends React.Component {
 			const weather_symbol = this.props.currentWeather.weather.map((weatherdata, i) =>{
 				return(
 				<div className="col-auto" key={weatherdata.main} style={{maxWidth: "300px"}}>
-					<div><img className="weatherIcon" width="160" alt={weatherdata.main} src={"https://openweathermap.org/img/wn/" + weatherdata.icon + "@2x.png"}/></div>
+					<div><img className="weatherIcon" width="160" alt={weatherdata.main} src={"http://openweathermap.org/img/w/" + weatherdata.icon + ".png"}/></div>
 					<div className="text-capitalize font-weight-bold" style={{lineHeight: "1"}}>{weatherdata.description}</div>
 				</div>)
 			})
@@ -90,13 +90,13 @@ class WeatherForecast extends React.Component {
                 if (daySet.indexOf(new_day) === -1 && new Date(this.props.forecastWeather.list[i].dt * 1000).getHours() >= 8 && new Date(this.props.forecastWeather.list[i].dt * 1000).getHours() <= 20)
 	                daySet.push(new_day);
 			}
-			const weatherCard = daySet.map((day, i) => {
+			const weatherCard = daySet.map((day) => {
 				const hourCard = this.props.forecastWeather.list.filter((weatherdata, i) => 
 					new Date(weatherdata.dt * 1000).getHours() >= 8 && new Date(weatherdata.dt * 1000).getHours() <= 20 && moment.unix(weatherdata.dt).format('dddd Do') === day
-				).map((weatherdata, i) => {
+				).map((weatherdata) => {
 					return (
 					<div key={weatherdata.dt_txt} className="col flex-shrink-0">
-						<div><img className="weatherIcon" alt={weatherdata.weather[0].main} height='80px' src={"https://openweathermap.org/img/wn/" + weatherdata.weather[0].icon + "@2x.png"}/></div>
+						<div><img className="weatherIcon" alt={weatherdata.weather[0].main} height='80px' src={"http://openweathermap.org/img/w/" + weatherdata.weather[0].icon + ".png"}/></div>
 						<div>{moment.unix(weatherdata.dt).format('h a')}</div>
 						<div>{weatherdata.main.temp.toFixed() + temp_unit}</div>
 						<div className="small">
