@@ -1,26 +1,14 @@
 {
   "files": {
-    "main.css": "/nightstand/static/css/main.170ba78b.chunk.css",
-    "main.js": "/nightstand/static/js/main.e1f4ea30.chunk.js",
-    "main.js.map": "/nightstand/static/js/main.e1f4ea30.chunk.js.map",
-    "runtime-main.js": "/nightstand/static/js/runtime-main.e0371e92.js",
-    "runtime-main.js.map": "/nightstand/static/js/runtime-main.e0371e92.js.map",
-    "static/css/2.5dc55297.chunk.css": "/nightstand/static/css/2.5dc55297.chunk.css",
-    "static/js/2.914837bb.chunk.js": "/nightstand/static/js/2.914837bb.chunk.js",
-    "static/js/2.914837bb.chunk.js.map": "/nightstand/static/js/2.914837bb.chunk.js.map",
+    "main.css": "/nightstand/static/css/main.046564a7.css",
+    "main.js": "/nightstand/static/js/main.975396ab.js",
     "index.html": "/nightstand/index.html",
-    "precache-manifest.23dced7a463b135e77b1926f440bfc7a.js": "/nightstand/precache-manifest.23dced7a463b135e77b1926f440bfc7a.js",
-    "service-worker.js": "/nightstand/service-worker.js",
-    "static/css/2.5dc55297.chunk.css.map": "/nightstand/static/css/2.5dc55297.chunk.css.map",
-    "static/css/main.170ba78b.chunk.css.map": "/nightstand/static/css/main.170ba78b.chunk.css.map",
-    "static/js/2.914837bb.chunk.js.LICENSE.txt": "/nightstand/static/js/2.914837bb.chunk.js.LICENSE.txt",
-    "static/media/settings_applications.svg": "/nightstand/static/media/settings_applications.1e7b161a.svg"
+    "static/media/settings_applications.svg": "/nightstand/static/media/settings_applications.bbe655c846512741a016302e580c8707.svg",
+    "main.046564a7.css.map": "/nightstand/static/css/main.046564a7.css.map",
+    "main.975396ab.js.map": "/nightstand/static/js/main.975396ab.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.e0371e92.js",
-    "static/css/2.5dc55297.chunk.css",
-    "static/js/2.914837bb.chunk.js",
-    "static/css/main.170ba78b.chunk.css",
-    "static/js/main.e1f4ea30.chunk.js"
+    "static/css/main.046564a7.css",
+    "static/js/main.975396ab.js"
   ]
 }
