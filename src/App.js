@@ -112,7 +112,10 @@ class WeatherIcon extends React.Component {
       description: "Heavy snow showers",
       imgSrc: this.iconPrefix + "icons/snowy-6.svg",
     },
-    95: { description: "Thunderstorm", imgSrc: this.iconPrefix + "icons/thunder.svg" },
+    95: {
+      description: "Thunderstorm",
+      imgSrc: this.iconPrefix + "icons/thunder.svg",
+    },
     96: {
       description: "Thunderstorm, slight hail",
       imgSrc: this.iconPrefix + "icons/thunder.svg",
@@ -171,23 +174,32 @@ class Weather extends React.Component {
               </div>
               <div className="row">
                 <div className="temp_small" style={{ lineHeight: "1" }}>
-                  {this.props.dayWeather.temperature_2m_min.toFixed() +
-                    temp_unit +
-                    " | " +
-                    this.props.dayWeather.temperature_2m_max.toFixed() +
-                    temp_unit}
+                  {this.props.dayWeather.temperature_2m_min &&
+                  this.props.dayWeather.temperature_2m_max
+                    ? this.props.dayWeather.temperature_2m_min.toFixed() +
+                      temp_unit +
+                      " | " +
+                      this.props.dayWeather.temperature_2m_max.toFixed() +
+                      temp_unit
+                    : ""}
                 </div>
               </div>
               <div className="row">
                 <div className="small">
                   <div className="small" style={{ fontWeight: "normal" }}>
-                    {"Rain/snow: " +
-                      this.props.dayWeather.precipitation_probability_max +
-                      "%, wind: " +
-                      this.props.dayWeather.wind_speed_10m_min +
-                      "-" +
-                      this.props.dayWeather.wind_speed_10m_max +
-                      wind_unit}
+                    {(this.props.dayWeather.precipitation_probability_max
+                      ? "Rain/snow: " +
+                        this.props.dayWeather.precipitation_probability_max +
+                        "%"
+                      : "") +
+                      (this.props.dayWeather.wind_speed_10m_min &&
+                      this.props.dayWeather.wind_speed_10m_max
+                        ? ", wind: " +
+                          this.props.dayWeather.wind_speed_10m_min +
+                          "-" +
+                          this.props.dayWeather.wind_speed_10m_max +
+                          wind_unit
+                        : "")}
                   </div>
                 </div>
               </div>
@@ -288,7 +300,8 @@ class WeatherForecast extends React.Component {
                     {hourlyForecast.wind_speed_10m[index] + wind_unit + " wind"}
                   </div>
                   <div style={{ fontWeight: "normal" }}>
-                    {hourlyForecast.precipitation_probability[index] + "% rain"}
+                    {hourlyForecast.precipitation_probability[index] +
+                      "% rain/snow"}
                   </div>
                 </div>
               </div>
@@ -297,7 +310,7 @@ class WeatherForecast extends React.Component {
         });
         return (
           <div key={day} className="border flex-shrink-0">
-            <div>
+            <b>
               {day +
                 (daySet[day].low && daySet[day].high
                   ? " (" +
@@ -308,7 +321,7 @@ class WeatherForecast extends React.Component {
                     temp_unit +
                     ")"
                   : "")}
-            </div>
+            </b>
             <div className="d-flex flex-row flex-nowrap">{hourCard}</div>
           </div>
         );
