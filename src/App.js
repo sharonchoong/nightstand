@@ -15,34 +15,34 @@ import Dropdown from "react-bootstrap/Dropdown";
 class WeatherIcon extends React.Component {
   iconPrefix = window.location.hostname === "localhost" ? "nightstand/" : "";
   weatherIcons = {
-    0: { description: "Clear sky", imgSrc: this.iconPrefix + "icons/day.svg" },
+    0: { description: "Clear sky", imgSrc: this.iconPrefix + (this.props.isNight? "icons/night.svg" : "icons/day.svg") },
     1: {
       description: "Mainly clear",
-      imgSrc: this.iconPrefix + "icons/cloudy-day-1.svg",
+      imgSrc: this.iconPrefix + (this.props.isNight? "icons/cloudy-night-1.svg" : "icons/cloudy-day-1.svg"),
     },
     2: {
       description: "Partly cloudy",
-      imgSrc: this.iconPrefix + "icons/cloudy-day-3.svg",
+      imgSrc: this.iconPrefix + (this.props.isNight? "icons/cloudy-night-3.svg" : "icons/cloudy-day-3.svg"),
     },
     3: {
       description: "Overcast",
-      imgSrc: this.iconPrefix + "icons/cloudy.svg",
+      imgSrc: this.iconPrefix + (this.props.isNight? "icons/cloudy.svg" : "icons/cloudy.svg"),
     },
     45: {
       description: "Fog",
-      imgSrc: this.iconPrefix + "icons/cloudy.svg",
+      imgSrc: this.iconPrefix + "icons/fog.png",
     },
     48: {
       description: "Depositing rime fog",
-      imgSrc: this.iconPrefix + "icons/cloudy.svg",
+      imgSrc: this.iconPrefix + "icons/fog.png",
     },
     51: {
       description: "Light drizzle",
-      imgSrc: this.iconPrefix + "icons/rainy-2.svg",
+      imgSrc: this.iconPrefix + (this.props.isNight? "icons/rainy-4.svg" : "icons/rainy-2.svg"),
     },
     53: {
       description: "Moderate drizzle",
-      imgSrc: this.iconPrefix + "icons/rainy-3.svg",
+      imgSrc: this.iconPrefix + (this.props.isNight? "icons/rainy-5.svg" : "icons/rainy-3.svg"),
     },
     55: {
       description: "Dense drizzle",
@@ -50,7 +50,7 @@ class WeatherIcon extends React.Component {
     },
     56: {
       description: "Light freezing drizzle",
-      imgSrc: this.iconPrefix + "icons/rainy-3.svg",
+      imgSrc: this.iconPrefix + (this.props.isNight? "icons/rainy-5.svg" : "icons/rainy-3.svg"),
     },
     57: {
       description: "Dense freezing drizzle",
@@ -94,7 +94,7 @@ class WeatherIcon extends React.Component {
     },
     80: {
       description: "Slight rain showers",
-      imgSrc: this.iconPrefix + "icons/rainy-2.svg",
+      imgSrc: this.iconPrefix + (this.props.isNight? "icons/rainy-4.svg" : "icons/rainy-2.svg"),
     },
     81: {
       description: "Moderate rain showers",
@@ -170,6 +170,7 @@ class Weather extends React.Component {
                 <WeatherIcon
                   weatherCode={this.props.currentWeather.weather_code}
                   includeDescription={true}
+                  isNight={moment().hour() > 18 || moment().hour() < 6}
                 />
               </div>
               <div className="row">
@@ -258,7 +259,7 @@ class WeatherForecast extends React.Component {
         if (
           moment(hourlyForecast.time[i]).valueOf() - Date.now() > 0 &&
           moment(hourlyForecast.time[i]).hour() >= 6 &&
-          moment(hourlyForecast.time[i]).hour() <= 20
+          moment(hourlyForecast.time[i]).hour() <= 21
         ) {
           if (!daySet[new_day]) {
             const dailyWeatherIndex =
@@ -266,7 +267,7 @@ class WeatherForecast extends React.Component {
                 moment(hourlyForecast.time[i]).format("YYYY-MM-DD"),
               );
             daySet[new_day] = {
-              indices: [i],
+              indices: [],
               high: this.props.forecastWeather.daily.temperature_2m_max[
                 dailyWeatherIndex
               ],
@@ -274,9 +275,8 @@ class WeatherForecast extends React.Component {
                 dailyWeatherIndex
               ],
             };
-          } else {
-            daySet[new_day].indices.push(i);
           }
+          daySet[new_day].indices.push(i);
         }
       }
       const weatherDayCard = Object.keys(daySet).map((day) => {
@@ -288,6 +288,7 @@ class WeatherForecast extends React.Component {
                   weatherCode={hourlyForecast.weather_code[index]}
                   height={"64"}
                   includeDescription={false}
+                  isNight={moment(hourlyForecast.time[index]).hour() > 18 || moment(hourlyForecast.time[index]).hour() < 6}
                 />
                 <div>{moment(hourlyForecast.time[index]).format("h a")}</div>
                 <div>
@@ -309,7 +310,7 @@ class WeatherForecast extends React.Component {
           );
         });
         return (
-          <div key={day} className="border flex-shrink-0">
+          <div key={day} className="border flex-shrink-0 pl-2 pr-2">
             <b>
               {day +
                 (daySet[day].low && daySet[day].high
@@ -642,6 +643,7 @@ class App extends React.Component {
         if (this.state.locations[i].selected) {
           coords.latitude = this.state.locations[i].latitude;
           coords.longitude = this.state.locations[i].longitude;
+          coords.timezone = this.state.locations[i].timezone;
           this.setState({
             selectedLocationName: this.state.locations[i].shortname,
           });
@@ -667,6 +669,7 @@ class App extends React.Component {
           wind_speed_unit: unitsystem === "metric" ? undefined : "mph",
           temperature_unit: unitsystem === "metric" ? undefined : "fahrenheit",
           precipitation_unit: unitsystem === "metric" ? undefined : "inch",
+          timezone: coords.timezone,
           daily: [
             "temperature_2m_max",
             "temperature_2m_min",
@@ -758,7 +761,8 @@ class App extends React.Component {
         <div className="text-muted small">
           Nightstand icon, made from{" "}
           <a href="http://www.onlinewebfonts.com/icon">Icon Fonts</a>, is
-          licensed by CC BY 3.0
+          licensed by CC BY 3.0.  
+          <a target="_blank" href="https://icons8.com/icon/5JFKFoWQfT74/fog"> Fog</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
         </div>
       </div>
     );
