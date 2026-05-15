@@ -186,7 +186,7 @@ class Weather extends React.Component {
                 </div>
               </div>
               <div className="row">
-                <div className="small">
+                <div className="small col">
                   <div className="small" style={{ fontWeight: "normal" }}>
                     {(this.props.dayWeather.precipitation_probability_max
                       ? "Rain/snow: " +
@@ -195,10 +195,10 @@ class Weather extends React.Component {
                       : "") +
                       (this.props.dayWeather.wind_speed_10m_min &&
                       this.props.dayWeather.wind_speed_10m_max
-                        ? ", wind: " +
-                          this.props.dayWeather.wind_speed_10m_min +
+                        ? (this.props.dayWeather.precipitation_probability_max ? ", " : "") + "wind: " +
+                          this.props.dayWeather.wind_speed_10m_min.toFixed() +
                           "-" +
-                          this.props.dayWeather.wind_speed_10m_max +
+                          this.props.dayWeather.wind_speed_10m_max.toFixed() +
                           wind_unit
                         : "")}
                   </div>
@@ -221,11 +221,11 @@ class Weather extends React.Component {
                   : ""}
               </div>
               <div className="wind" style={{ lineHeight: "1" }}>
-                {this.props.currentWeather.wind_speed_10m + wind_unit}
+                {this.props.currentWeather.wind_speed_10m.toFixed() + wind_unit}
               </div>
               <div className="small" style={{ lineHeight: "1" }}>
                 {"(gusts: " +
-                  this.props.currentWeather.wind_gusts_10m +
+                  this.props.currentWeather.wind_gusts_10m.toFixed() +
                   wind_unit +
                   ")"}
               </div>
@@ -249,7 +249,7 @@ class WeatherForecast extends React.Component {
   }
   render() {
     const temp_unit = this.props.unit === "metric" ? "°C" : "°F";
-    const wind_unit = this.props.unit === "metric" ? "m/s" : "mph";
+    const wind_unit = this.props.unit === "metric" ? "k/h" : "mph";
 
     if (this.props.forecastWeather) {
       const hourlyForecast = this.props.forecastWeather.hourly;
@@ -298,7 +298,7 @@ class WeatherForecast extends React.Component {
                 </div>
                 <div className="small">
                   <div style={{ fontWeight: "normal" }}>
-                    {hourlyForecast.wind_speed_10m[index] + wind_unit + " wind"}
+                    {hourlyForecast.wind_speed_10m[index] ? hourlyForecast.wind_speed_10m[index].toFixed() + wind_unit + " wind" : ""}
                   </div>
                   <div style={{ fontWeight: "normal" }}>
                     {hourlyForecast.precipitation_probability[index] +
