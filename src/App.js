@@ -233,6 +233,10 @@ class Weather extends React.Component {
           </div>
         </div>
       );
+    } else if (this.props.errorMessage) {
+      return (
+        <div>{this.props.errorMessage}</div>
+      );
     } else return null;
   }
 }
@@ -573,6 +577,7 @@ class App extends React.Component {
       unitsystem: "imperial",
       currentWeather: null,
       forecastWeather: null,
+      errorMessage: null,
     };
   }
   handleLocationChange(action, loc) {
@@ -711,15 +716,18 @@ class App extends React.Component {
           currentWeather: response.current,
           dayWeather: daily,
           forecastWeather: { hourly: response.hourly, daily: response.daily },
+          errorMessage: null
         });
       })
       .catch(function (error) {
-        alert(
-          "When retrieving weather: " +
+        that.setState({
+          currentWeather: null,
+          forecastWeather: null,
+          errorMessage: "When retrieving weather: " +
             error +
             ". " +
-            (error.response ? error.response.data.message : ""),
-        );
+            (error.response ? error.response.data.message : "")
+        });
       });
   }
   handleUnitChange(newUnit) {
@@ -748,6 +756,7 @@ class App extends React.Component {
               getLocation={() => this.getLocation()}
               selectedLocationName={this.state.selectedLocationName}
               unit={this.state.unitsystem}
+              errorMessage={this.state.errorMessage}
             />
           </header>
         </div>
