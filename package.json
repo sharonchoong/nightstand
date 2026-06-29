@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://sharonchoong.github.io/nightstand",
   "dependencies": {
-    "@babel/core": "^7.16.0",
+    "@babel/core": "^7.29.6",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
     "@svgr/webpack": "^8.1.0",
     "axios": "^1.15.2",
