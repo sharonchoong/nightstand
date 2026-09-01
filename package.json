@@ -5,7 +5,7 @@
   "homepage": "https://sharonchoong.github.io/nightstand",
   "dependencies": {
     "@babel/core": "^7.29.6",
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.6.3",
     "@svgr/webpack": "^8.1.0",
     "axios": "^1.18.0",
     "babel-jest": "^27.4.2",
@@ -55,7 +55,7 @@
     "tailwindcss": "^3.0.2",
     "terser-webpack-plugin": "^5.6.0",
     "webpack": "^5.105.0",
-    "webpack-dev-server": "^5.2.2",
+    "webpack-dev-server": "^6.0.0",
     "webpack-manifest-plugin": "^4.0.2",
     "workbox-webpack-plugin": "^7.4.1"
   },
