@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/nightstand/static/css/main.d2d833ff.css",
-    "main.js": "/nightstand/static/js/main.c34692ff.js",
+    "main.js": "/nightstand/static/js/main.d3832c55.js",
     "index.html": "/nightstand/index.html",
     "static/media/settings_applications.svg": "/nightstand/static/media/settings_applications.bbe655c846512741a016302e580c8707.svg",
     "main.d2d833ff.css.map": "/nightstand/static/css/main.d2d833ff.css.map",
-    "main.c34692ff.js.map": "/nightstand/static/js/main.c34692ff.js.map"
+    "main.d3832c55.js.map": "/nightstand/static/js/main.d3832c55.js.map"
   },
   "entrypoints": [
     "static/css/main.d2d833ff.css",
-    "static/js/main.c34692ff.js"
+    "static/js/main.d3832c55.js"
   ]
 }
